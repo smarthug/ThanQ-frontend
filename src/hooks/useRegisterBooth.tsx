@@ -22,7 +22,7 @@ export const useRegisterBooth = (name: string, baseURI: string) => {
     return ()=>{
         writeContract({
             abi,
-            address: CONTRACT_ADDRESSES[chain.id],
+            address: chain ? CONTRACT_ADDRESSES[chain.id] : undefined,
             functionName: 'registerBooth',
             args: [name, baseURI],
         })

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box, Avatar, Grid, Button, TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { styled } from '@mui/system';
-import PolygonLogo from './polygon_logo.svg'; // Replace with the actual path to your logo
 import { Link } from 'react-router-dom';
 
-import { useBoothCounter } from '../../hooks/useBoothCounter';
+// import { useBoothCounter } from '../../hooks/useBoothCounter';
 import { useBooths } from '../../hooks/useBooths';
 import { useGetAllWaitingAmount } from '../../hooks/useGetAllWaitingAmount';
 
@@ -54,7 +53,7 @@ const QueueCard = ({ boothName, queueCount }) => {
 
 // Example usage of the card
 const HomeScreen = () => {
-    const boothCounter = useBoothCounter();
+    // const boothCounter = useBoothCounter();
     // console.log(Number(boothCounter.data));
     const booth = useBooths(1);
     console.log(booth);
