@@ -11,8 +11,11 @@ import {
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { useCallNext } from "../../hooks/useWriteThanQContract";
+
 export default function JoinQueue() {
   const params = useParams();
+  const callNext = useCallNext(params.queueId);
   const [queueInfo, setQueueInfo] = useState(null);
 
   useEffect(() => {
@@ -26,7 +29,8 @@ export default function JoinQueue() {
   }, [params.queueId]);
 
   function onClick() {
-    console.log("clicked");
+    console.log("call next");
+    callNext();
   }
 
   if (!queueInfo) {
