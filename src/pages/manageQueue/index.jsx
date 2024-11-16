@@ -1,21 +1,9 @@
-import {
-  Button,
-  Box,
-  Typography,
-  Avatar,
-  CircularProgress,
-  Card,
-  CardContent,
-  CardMedia,
-} from "@mui/material";
+import { Button, Box, Typography, Avatar, CircularProgress, Card, CardContent, CardMedia } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import { useCallNext } from "../../hooks/useWriteThanQContract";
-
 export default function JoinQueue() {
   const params = useParams();
-  const callNext = useCallNext(params.queueId);
   const [queueInfo, setQueueInfo] = useState(null);
 
   useEffect(() => {
@@ -29,8 +17,8 @@ export default function JoinQueue() {
   }, [params.queueId]);
 
   function onClick() {
-    console.log("call next");
-    callNext();
+    console.log("clicked");
+    useCallNext();
   }
 
   if (!queueInfo) {
@@ -38,16 +26,7 @@ export default function JoinQueue() {
   }
 
   return (
-    <Box
-      sx={{
-        padding: 3,
-        maxWidth: 600,
-        margin: "auto",
-        backgroundColor: "red",
-        borderRadius: 4,
-        boxShadow: 3,
-      }}
-    >
+    <Box sx={{ padding: 3, maxWidth: 600, margin: 'auto', backgroundColor: '#f9f9f9', borderRadius: 4, boxShadow: 3 }}>
       <Card sx={{ mb: 3 }}>
         {/* Booth Logo and Name */}
         <CardMedia
@@ -57,22 +36,14 @@ export default function JoinQueue() {
           alt={queueInfo.name}
         />
         <CardContent>
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{
-              fontWeight: "bold",
-              textAlign: "center",
-              mb: 2,
-            }}
-          >
+          <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 2 }}>
             {queueInfo.name}
           </Typography>
           {/* Waiting Count and Current Status */}
-          <Typography variant="body1" sx={{ textAlign: "center", mb: 1 }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 1 }}>
             Number of people waiting: {queueInfo.waitingCount}
           </Typography>
-          <Typography variant="body1" sx={{ textAlign: "center", mb: 2 }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 2 }}>
             Current Status: {queueInfo.status}
           </Typography>
         </CardContent>
@@ -82,11 +53,11 @@ export default function JoinQueue() {
       <Button
         sx={{
           background: (theme) => theme.palette.primary.main,
-          color: "white",
-          fontWeight: "bold",
+          color: 'white',
+          fontWeight: 'bold',
           borderRadius: 2,
-          transition: "background 0.3s ease",
-          "&:hover": {
+          transition: 'background 0.3s ease',
+          '&:hover': {
             background: (theme) => theme.palette.primary.dark,
           },
         }}

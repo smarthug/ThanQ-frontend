@@ -1,7 +1,7 @@
 import PublicIcon from "@mui/icons-material/Public";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import AddCircleIcon from "@mui/icons-material/AddCircleOutline";
-import { useState, useEffect } from "react";
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import AddCircleIcon from '@mui/icons-material/AddCircleOutline';
+import { useState } from "react";
 import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -9,25 +9,27 @@ export default function LabelBottomNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Map paths to values
-  const getValueFromPath = (path) => {
-    switch (path) {
-      case "/createdQueue":
-        return "0";
-      case "/world":
-        return "1";
-      case "/joinedQueue":
-        return "2";
-      default:
-        return "1";
-    }
-  };
+  // Get the current path to set the value
+  const currentPath = location.pathname;
 
-  const [value, setValue] = useState(getValueFromPath(location.pathname));
+  // Determine the value based on the current path
+  let initialValue;
+  switch (currentPath) {
+    case "/createdQueue":
+      initialValue = "0";
+      break;
+    case "/world":
+      initialValue = "1";
+      break;
+    case "/joinedQueue":
+      initialValue = "2";
+      break;
+    default:
+      initialValue = "1";
+      break;
+  }
 
-  useEffect(() => {
-    setValue(getValueFromPath(location.pathname));
-  }, [location.pathname]);
+  const [value, setValue] = useState(initialValue);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -48,29 +50,18 @@ export default function LabelBottomNavigation() {
 
   return (
     <Paper
-      sx={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        bgcolor: "#072F4A",
-      }}
+      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
       elevation={3}
     >
       <BottomNavigation
         showLabels={false}
-        value={value}
+        value={`${value}`}
         onChange={handleChange}
         sx={{
-          bgcolor: "#072F4A",
-          "& .MuiBottomNavigationAction-root .MuiSvgIcon-root": {
-            color: "#e6fff7", // Unselected icon color
-          },
-          "& .MuiBottomNavigationAction-root.Mui-selected .MuiSvgIcon-root": {
-            color: "#00E3A0", // Selected icon color
-          },
-          "& .MuiBottomNavigationAction-label": {
-            color: "#00E3A0",
+          color: (theme) => theme.palette.text.primary,
+          '& .Mui-selected': {
+            // color:(theme) => theme.palette.gradient.main
+            color:"#4caf50"
           },
         }}
       >
