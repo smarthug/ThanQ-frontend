@@ -15,12 +15,12 @@ const JoinedQueuesPage = () => {
   ]);
   const { address } = useAccount();
   const getUserQueuePositions = useGetUserQueuePositions(address);
-  console.log(address)
+  console.log(getUserQueuePositions)
 
-  useEffect(() => {
-    // const result = getUserQueuePositions();
-    console.log(getUserQueuePositions);
-  }, [getUserQueuePositions]);
+  // useEffect(() => {
+  //   // const result = getUserQueuePositions();
+  //   console.log(getUserQueuePositions);
+  // }, [getUserQueuePositions]);
 
 
   return (

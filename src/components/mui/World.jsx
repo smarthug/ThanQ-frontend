@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 
 // import { useBoothCounter } from '../../hooks/useBoothCounter';
-import { useBooths } from '../../hooks/useBooths';
+// import { useBooths } from '../../hooks/useBooths';
 import { useGetAllWaitingAmount } from '../../hooks/useReadThanQContract';
 
 // Custom styled card component
@@ -55,8 +55,8 @@ const QueueCard = ({ boothName, queueCount }) => {
 const HomeScreen = () => {
     // const boothCounter = useBoothCounter();
     // console.log(Number(boothCounter.data));
-    const booth = useBooths(1);
-    console.log(booth);
+    // const booth = useBooths(1);
+    // console.log(booth);
     // console.log("fefefefefef")
     const allWaitingAmount = useGetAllWaitingAmount();
     console.log(allWaitingAmount);
