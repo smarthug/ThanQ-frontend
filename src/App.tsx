@@ -12,13 +12,15 @@ import { Outlet } from "react-router-dom";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { mainnet, filecoinCalibration, flowTestnet,sepolia } from "wagmi/chains";
+import { mainnet, filecoinCalibration, flowTestnet, sepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
+import MiniKitProvider from "./minikit-provider";
 
 const config = getDefaultConfig({
   appName: "ThanQ",
   projectId: "fc8b5ed20be8c39819928d4a45318f7e",
-  chains: [mainnet, filecoinCalibration, flowTestnet,sepolia],
+  chains: [mainnet, filecoinCalibration, flowTestnet, sepolia],
   ssr: false, // If your dApp uses server side rendering (SSR)
 });
 
@@ -53,27 +55,29 @@ const queryClient = new QueryClient();
 function App() {
   useEffect(() => { }, []);
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <Suspense fallback={<div>Loading...</div>}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <RootContainer>
-                <DrawerAppBar />
+    <MiniKitProvider>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitProvider>
+            <Suspense fallback={<div>Loading...</div>}>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <RootContainer>
+                  <DrawerAppBar />
 
-                <ContentBox>
-                  {/* 여기에 콘텐츠를 추가하세요 */}
-                  <Outlet />
-                </ContentBox>
-                <BottomNav />
-                <PWABadge />
-              </RootContainer>
-            </ThemeProvider>
-          </Suspense>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+                  <ContentBox>
+                    {/* 여기에 콘텐츠를 추가하세요 */}
+                    <Outlet />
+                  </ContentBox>
+                  <BottomNav />
+                  <PWABadge />
+                </RootContainer>
+              </ThemeProvider>
+            </Suspense>
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </MiniKitProvider>
   );
 }
 
