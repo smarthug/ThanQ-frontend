@@ -8,6 +8,8 @@ import World from "./pages/world";
 import CreatedQueue from "./pages/createdQueue/index.jsx";
 import JoinedQueue from "./pages/joinedQueue/index.jsx";
 import CreateQueue from "./pages/createQueue/index.jsx";
+import JoinQueue from "./pages/joinQueue/index.jsx";
+import ManageQueue from "./pages/manageQueue/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: "createQueue",
         element: <CreateQueue />,
+      },
+      {
+        path: "joinQueue",
+        element: <JoinQueue />,
+      },
+      {
+        path: "manageQueue",
+        element: <ManageQueue />,
       },
     ],
   },
