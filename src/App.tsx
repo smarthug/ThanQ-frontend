@@ -24,12 +24,12 @@ const config = getDefaultConfig({
 
 const RootContainer = styled(Box)({
   // maxWidth:"480px",
-  height: "100dvh",
+  // height: "100dvh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  overflow: "hidden",
+  // overflow: "hidden",
   padding: 0,
   backgroundColor: "#f5f5f5",
 });
@@ -37,12 +37,12 @@ const RootContainer = styled(Box)({
 const ContentBox = styled(Box)({
   maxWidth: "480px",
   width: "100%",
-  height: "100%",
+  // height: "100%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  overflow: "hidden",
+  // overflow: "hidden",
   marginTop: "56px",
   marginBottom: "56px",
   backgroundColor: "#ffffff",
