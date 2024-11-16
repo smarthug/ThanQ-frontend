@@ -1,0 +1,9 @@
+name = "my-project"
+compatibility_date = "2024-11-16"
+main = "functions/index.js" # Functions의 메인 엔트리
+
+[site]
+bucket = "./dist" # Vite 빌드 경로
+
+
+pages_build_output_dir = "./dist"

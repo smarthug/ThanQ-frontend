@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
+import * as Client from "@web3-storage/w3up-client";
+import { Signer } from "@web3-storage/w3up-client/principal/ed25519";
+import * as Proof from "@web3-storage/w3up-client/proof";
+import { StoreMemory } from "@web3-storage/w3up-client/stores/memory";
+
 const StyledContainer = styled(Container)({
   display: 'flex',
   flexDirection: 'column',
@@ -36,12 +41,35 @@ const CreateQueue = () => {
     setImage(e.target.files[0]);
   };
 
-  const handleSubmit = () => {
-    // Here, you would handle the form submission, such as making an API call
+  const handleSubmit = async () => {
+    await UploadFile();
     console.log('Queue Created:', { name, maxParticipant, image });
   };
 
   const isFormComplete = name !== '' && maxParticipant !== '' && image !== null;
+
+  async function UploadFile() {
+    try {
+      if (!image) {
+        console.error("No image selected for upload");
+        return;
+      }
+      
+      const principal = Signer.parse(import.meta.env.KEY!);
+      const store = new StoreMemory();
+      const client = await Client.create({ principal, store });
+
+      const proof = await Proof.parse(import.meta.env.PROOF!);
+      const space = await client.addSpace(proof);
+      await client.setCurrentSpace(space.did());
+
+      // Upload the image file on Storacha
+      const cid = await client.uploadFile(image);
+      console.log("Image uploaded with CID:", cid);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  }
 
   return (
     <StyledContainer maxWidth="xs">
@@ -72,12 +100,12 @@ const CreateQueue = () => {
           alt="Preview"
         />
       )}
-      <Button 
-      sx={{ background: (theme) => theme.palette.gradient.main }}
-        variant="contained" 
-        color="primary" 
-        fullWidth 
-        onClick={handleSubmit} 
+      <Button
+        sx={{ background: (theme) => theme.palette.gradient.main }}
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={handleSubmit}
         disabled={!isFormComplete}
       >
         Create Queue
