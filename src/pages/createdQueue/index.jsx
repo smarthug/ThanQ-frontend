@@ -48,7 +48,9 @@ export default function CreatedQueue() {
                 </Typography>
               </CardContent>
               <CardActions>
+                <Link to={`/manageQueue/${1}`}>
                 <Button size="small" variant="contained">Manage Queue</Button>
+                </Link>
               </CardActions>
             </Card>
           </Grid>
