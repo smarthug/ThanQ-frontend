@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box, Avatar, Grid, Button, TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { styled } from '@mui/system';
 import PolygonLogo from './polygon_logo.svg'; // Replace with the actual path to your logo
+import { Link } from 'react-router-dom';
 
 // Custom styled card component
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -37,9 +38,11 @@ const QueueCard = ({ boothName, queueCount }) => {
                 <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
                     {queueCount}
                 </Typography>
-                <Button variant="contained" color="primary" sx={{ marginTop: 2 }}>
-                    View Details
-                </Button>
+                <Link to={`/joinQueue/${1}`} style={{ textDecoration: 'none' }}>
+                    <Button variant="contained" color="primary" sx={{ marginTop: 2 }}>
+                        View Details
+                    </Button>
+                </Link>
             </CardContent>
         </StyledCard>
     );
