@@ -31,7 +31,7 @@ const RootContainer = styled(Box)({
   alignItems: "center",
   // overflow: "hidden",
   padding: 0,
-  backgroundColor: "#f5f5f5",
+  backgroundColor: "#012740",
 });
 
 const ContentBox = styled(Box)({
@@ -45,13 +45,13 @@ const ContentBox = styled(Box)({
   // overflow: "hidden",
   marginTop: "56px",
   marginBottom: "56px",
-  backgroundColor: "#ffffff",
+  backgroundColor: "#012740",
 });
 
 const queryClient = new QueryClient();
 
 function App() {
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
