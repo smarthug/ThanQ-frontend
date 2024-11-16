@@ -84,7 +84,7 @@ const fakeApiFetchQueueInfo = async (queueId) => {
       resolve({
         id: queueId,
         name: "Flow Booth",
-        logoUrl: "https://via.placeholder.com/150",
+        logoUrl: "https://bafybeib3f6u3cs5ob2efhsrvlvgxu7fax7e5z5pdhu7ddlwkaerepebb7a.ipfs.w3s.link/flow.svg",
         waitingCount: 15,
         status: "In Progress",
       });
