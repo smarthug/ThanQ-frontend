@@ -36,5 +36,13 @@ contract BoothQueue is ERC721, Ownable {
         transferOwnership(initialOwner);
     }
 
-    
+    // Owner register the operator and metadata for each booth
+    function registerBooth(string memory name, string memory baseURI) public {
+        Booth storage booth = booths[boothCounter++];
+        booth.nextAvailableId = 1;
+        booth.nextInLine = 1;
+        booth.operator = msg.sender;
+        booth.name = name;
+        booth.baseURI = baseURI;        
+    }
 }
