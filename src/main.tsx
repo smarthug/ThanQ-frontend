@@ -38,11 +38,11 @@ const router = createBrowserRouter([
         element: <CreateQueue />,
       },
       {
-        path: "joinQueue",
+        path: "joinQueue/:queueId",
         element: <JoinQueue />,
       },
       {
-        path: "manageQueue",
+        path: "manageQueue/:queueId",
         element: <ManageQueue />,
       },
     ],

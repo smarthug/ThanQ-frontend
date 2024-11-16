@@ -1,4 +1,10 @@
-export default function JoinedQueue() {
+import { useParams } from "react-router-dom";
+
+export default function JoinQueue() {
+  const params = useParams();
+  console.log(params.queueId); // "hotspur"
+
+
   return (
     <>
 
