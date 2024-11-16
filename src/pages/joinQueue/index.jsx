@@ -23,8 +23,10 @@ export default function JoinQueue() {
 
   function onClick() {
     console.log("joined queue");
-    const worldMode = false;
-    if (worldMode) {
+    // const worldMode = false;
+    // if (worldMode) {
+
+    if (MiniKit.isInstalled()) {
 
       JoinQueueWorld();
 
