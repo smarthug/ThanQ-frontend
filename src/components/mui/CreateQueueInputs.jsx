@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
+import { useRegisterBooth } from '../../hooks/useRegisterBooth';
+
+
 const StyledContainer = styled(Container)({
   display: 'flex',
   flexDirection: 'column',
@@ -28,9 +31,15 @@ const PreviewImage = styled('img')({
 });
 
 const CreateQueue = () => {
-  const [name, setName] = useState('');
+
+  const [name, setName] = useState('chiliz');
   const [maxParticipant, setMaxParticipant] = useState('');
   const [image, setImage] = useState(null);
+  
+  
+  const baseURI = 'https://asynclineup.s3.ap-northeast-2.amazonaws.com/json/chiliz/';
+  const registerBooth = useRegisterBooth(name, baseURI);
+  // const { write, isLoading, isSuccess, isError } = useRegisterBooth(name, baseURI);
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -39,7 +48,16 @@ const CreateQueue = () => {
   const handleSubmit = () => {
     // Here, you would handle the form submission, such as making an API call
     console.log('Queue Created:', { name, maxParticipant, image });
+    registerBooth();
+    // writeContract({
+    //   abi,
+    //   address: CONTRACT_ADDRESSES[545],
+    //   functionName: 'registerBooth',
+    //   args: [name, baseURI],
+    // })
   };
+
+
 
   const isFormComplete = name !== '' && maxParticipant !== '' && image !== null;
 
@@ -72,13 +90,13 @@ const CreateQueue = () => {
           alt="Preview"
         />
       )}
-      <Button 
-      sx={{ background: (theme) => theme.palette.gradient.main }}
-        variant="contained" 
-        color="primary" 
-        fullWidth 
-        onClick={handleSubmit} 
-        disabled={!isFormComplete}
+      <Button
+        sx={{ background: (theme) => theme.palette.gradient.main }}
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={handleSubmit}
+      // disabled={!isFormComplete}
       >
         Create Queue
       </Button>

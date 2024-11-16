@@ -4,6 +4,10 @@ import { styled } from '@mui/system';
 import PolygonLogo from './polygon_logo.svg'; // Replace with the actual path to your logo
 import { Link } from 'react-router-dom';
 
+import { useBoothCounter } from '../../hooks/useBoothCounter';
+import { useBooths } from '../../hooks/useBooths';
+import { useGetAllWaitingAmount } from '../../hooks/useGetAllWaitingAmount';
+
 // Custom styled card component
 const StyledCard = styled(Card)(({ theme }) => ({
     borderRadius: 16,
@@ -50,6 +54,14 @@ const QueueCard = ({ boothName, queueCount }) => {
 
 // Example usage of the card
 const HomeScreen = () => {
+    const boothCounter = useBoothCounter();
+    // console.log(Number(boothCounter.data));
+    const booth = useBooths(1);
+    console.log(booth);
+    // console.log("fefefefefef")
+    const allWaitingAmount = useGetAllWaitingAmount();
+    console.log(allWaitingAmount);
+
     const [booths, setBooths] = useState([
         { boothName: 'polygon', queueCount: 2 },
         { boothName: 'ethereum', queueCount: 5 },
