@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Box, Avatar, Grid, Button, TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { Card, CardContent, Typography, Box, Avatar, Grid, Button, TextField, MenuItem, Select, InputLabel, FormControl, CardHeader, CardMedia } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 // import { useBooths } from '../../hooks/useBooths';
 import { useGetAllWaitingAmount } from '../../hooks/useReadThanQContract';
 
+
+const logoURL = "https://bafybeib3f6u3cs5ob2efhsrvlvgxu7fax7e5z5pdhu7ddlwkaerepebb7a.ipfs.w3s.link/"
 // Custom styled card component
 const StyledCard = styled(Card)(({ theme }) => ({
     borderRadius: 16,
@@ -21,17 +23,17 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 // Card component to display booth information
-const QueueCard = ({ boothName, queueCount }) => {
+const QueueCard = ({ boothName, queueCount, boothLogo }) => {
     return (
-        <StyledCard>
+        <Card>
+            {/* Use CardMedia to display the logo as a banner image */}
+            <CardMedia
+                component="img"
+                height="60"
+                image={`https://bafybeib3f6u3cs5ob2efhsrvlvgxu7fax7e5z5pdhu7ddlwkaerepebb7a.ipfs.w3s.link/${boothName}.svg`}
+                alt={`${boothName} Logo`}
+            />
             <CardContent>
-                <Box display="flex" justifyContent="center" mb={2}>
-                    <Avatar
-                        src={null}
-                        alt="Polygon Logo"
-                        sx={{ width: 72, height: 72, border: '2px solid #3f51b5', padding: '4px', backgroundColor: 'white' }}
-                    />
-                </Box>
                 <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', color: '#3f51b5' }}>
                     {boothName}
                 </Typography>
@@ -47,9 +49,11 @@ const QueueCard = ({ boothName, queueCount }) => {
                     </Button>
                 </Link>
             </CardContent>
-        </StyledCard>
+        </Card>
     );
 };
+
+
 
 // Example usage of the card
 const HomeScreen = () => {
@@ -61,14 +65,22 @@ const HomeScreen = () => {
     const allWaitingAmount = useGetAllWaitingAmount();
     console.log(allWaitingAmount);
 
-    const [booths, setBooths] = useState([
-        { boothName: 'polygon', queueCount: 2 },
-        { boothName: 'ethereum', queueCount: 5 },
-        { boothName: 'solana', queueCount: 3 },
-        { boothName: 'avalanche', queueCount: 1 },
-        { boothName: 'binance', queueCount: 4 },
-        { boothName: 'cosmos', queueCount: 6 },
-    ]);
+    const [booths, setBooths] = useState([{ 'boothName': 'BASE', 'queueCount': 5 },
+    { 'boothName': 'Hedera', 'queueCount': 4 },
+    { 'boothName': 'KINTO', 'queueCount': 7 },
+    { 'boothName': 'Layer%20Zero', 'queueCount': 2 },
+    { 'boothName': 'Morph', 'queueCount': 9 },
+    { 'boothName': 'Protocol%20Labs', 'queueCount': 2 },
+    { 'boothName': 'Push', 'queueCount': 2 },
+    { 'boothName': 'Scroll', 'queueCount': 6 },
+    { 'boothName': 'XMTP', 'queueCount': 6 },
+    { 'boothName': 'bitkub', 'queueCount': 7 },
+    { 'boothName': 'chiliz', 'queueCount': 8 },
+    { 'boothName': 'flow', 'queueCount': 9 },
+    { 'boothName': 'polygon', 'queueCount': 9 },
+    { 'boothName': 'sign', 'queueCount': 10 },
+    { 'boothName': 'vlayer', 'queueCount': 5 },
+    { 'boothName': 'world', 'queueCount': 4 }]);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOrder, setSortOrder] = useState('');
 
@@ -137,3 +149,37 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+
+
+// BASE
+
+// Hedera
+
+// KINTO
+
+// Layer
+
+// Morph
+
+// Protocol
+
+// Push
+
+// Scroll
+
+// XMTP
+
+// bitkub
+
+// chiliz
+
+// flow
+
+// polygon
+
+// sign
+
+// vlayer
+
+// world
