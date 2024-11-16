@@ -51,4 +51,31 @@ contract BoothQueue is ERC721, Ownable {
         return booth.waiting[msg.sender];
         
     }
+
+
+     // Joining queue and minting NFT
+    function joinQueue(uint256 boothId) public returns (uint256) {
+        Booth storage booth = booths[boothId];
+        require(booth.nextAvailableId > 0, "Booth does not exist");
+        emit DebugWaitingValue(booth.waiting[msg.sender]);  // 현재 값을 확인하는 이벤트
+
+        require(booth.waiting[msg.sender] < 1, "Already in queue for this booth");
+
+        uint256 currentId = booth.nextAvailableId;
+        booth.queue[currentId] = msg.sender;
+        booth.waiting[msg.sender] = currentId;
+        userTokens[boothId][msg.sender] = tokenIdCounter;
+        booth.currentProcessing = msg.sender;
+
+        uint256 tokenId = tokenIdCounter;
+        _mint(msg.sender, tokenId);
+
+        emit Enqueued(boothId, msg.sender, tokenId);
+
+        userBooths[msg.sender].push(boothId);
+        tokenIdCounter += 1;
+        booth.nextAvailableId += 1;
+
+        return tokenId;
+    }
 }
