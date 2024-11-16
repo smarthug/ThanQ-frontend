@@ -7,6 +7,7 @@ import ErrorPage from "./pages/error-page.jsx";
 import World from "./pages/world";
 import CreatedQueue from "./pages/createdQueue/index.jsx";
 import JoinedQueue from "./pages/joinedQueue/index.jsx";
+import CreateQueue from "./pages/createQueue/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "joinedQueue",
         element: <JoinedQueue />,
+      },
+      {
+        path: "createQueue",
+        element: <CreateQueue />,
       },
     ],
   },
