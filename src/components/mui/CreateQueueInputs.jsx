@@ -32,12 +32,12 @@ const PreviewImage = styled('img')({
 
 const CreateQueue = () => {
 
-  const [name, setName] = useState('fefef');
+  const [name, setName] = useState('chiliz');
   const [maxParticipant, setMaxParticipant] = useState('');
   const [image, setImage] = useState(null);
   
   
-  const baseURI = 'https://api.example.com';
+  const baseURI = 'https://asynclineup.s3.ap-northeast-2.amazonaws.com/json/chiliz/';
   const registerBooth = useRegisterBooth(name, baseURI);
   // const { write, isLoading, isSuccess, isError } = useRegisterBooth(name, baseURI);
 
