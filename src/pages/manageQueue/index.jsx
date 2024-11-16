@@ -2,20 +2,17 @@ import { Button, Box, Typography, Avatar, CircularProgress, Card, CardContent, C
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { createWalletClient, custom } from 'viem';
-import { getAccount } from '@wagmi/core'
-import { sepolia } from 'viem/chains';
-// import { ethers } from ethers;
+
 import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
-// import { NotificationItem } from @pushprotocol/uiweb;
+
 
 
 import { useCallNext } from "../../hooks/useWriteThanQContract";
 
-import { providers,ethers } from 'ethers'
-// import { useMemo } from 'react'
-// import type { Account, Chain, Client, Transport } from 'viem'
-// import { Config, useConnectorClient } from 'wagmi'
+import { providers, ethers } from 'ethers'
+
+import { QRCodeSVG } from 'qrcode.react';
+
 
 
 const wallet = "0xfa6Cc5134a2e81a2F19113992Ef61F9BE81cafdE"
@@ -100,12 +97,9 @@ export default function JoinQueue() {
     <Box sx={{ padding: 3, maxWidth: 600, margin: 'auto', backgroundColor: '#f9f9f9', borderRadius: 4, boxShadow: 3 }}>
       <Card sx={{ mb: 3 }}>
         {/* Booth Logo and Name */}
-        <CardMedia
-          component="img"
-          height="180"
-          image={queueInfo.logoUrl}
-          alt={queueInfo.name}
-        />
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>
+        <QRCodeSVG value="https://thanq.io/joinqueue/1" />
+          </Box>
         <CardContent>
           <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 2 }}>
             {queueInfo.name}
@@ -113,6 +107,9 @@ export default function JoinQueue() {
           {/* Waiting Count and Current Status */}
           <Typography variant="body1" sx={{ textAlign: 'center', mb: 1 }}>
             Number of people waiting: {queueInfo.waitingCount}
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 1 }}>
+            Number of people demoed: {queueInfo.waitingCount}
           </Typography>
           <Typography variant="body1" sx={{ textAlign: 'center', mb: 2 }}>
             Current Status: {queueInfo.status}
@@ -152,7 +149,7 @@ const fakeApiFetchQueueInfo = async (queueId) => {
       resolve({
         id: queueId,
         name: "Flow Booth",
-        logoUrl: "https://via.placeholder.com/150",
+        logoUrl: "https://bafybeib3f6u3cs5ob2efhsrvlvgxu7fax7e5z5pdhu7ddlwkaerepebb7a.ipfs.w3s.link/flow.svg",
         waitingCount: 15,
         status: "In Progress",
       });
