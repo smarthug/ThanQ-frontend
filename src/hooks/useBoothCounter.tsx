@@ -14,7 +14,7 @@ export function useBoothCounter() {
     const { chain } = useAccount();
     const result = useReadContract({
         abi,
-        address: CONTRACT_ADDRESSES[chain.id],
+        address: chain ? CONTRACT_ADDRESSES[chain.id] : undefined,
         functionName: 'boothCounter',
     })
 
