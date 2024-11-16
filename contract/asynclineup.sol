@@ -78,4 +78,44 @@ contract BoothQueue is ERC721, Ownable {
 
         return tokenId;
     }
+
+
+     // Call next person & postpone
+    function callNext(uint256 boothId) public {
+        Booth storage booth = booths[boothId];
+        address prevUser = booth.queue[booth.nextInLine];
+        require(msg.sender == booth.operator, "Caller is not the operator");
+
+        // if there is person in the postponed queue and process
+        if (booth.postponed[booth.nextPostponed] != address(0) && !processingUser[booth.postponed[booth.nextPostponed]]) {
+            address postponedUser = booth.postponed[booth.nextPostponed];
+            emit NextInLine(boothId, postponedUser);
+            booth.currentProcessing = postponedUser;
+            delete booth.postponed[booth.nextPostponed];
+            processingUser[postponedUser] = true;
+            booth.nextPostponed += 1;
+            processingUser[prevUser] = false;
+            return;
+        }
+
+        address currentUser = booth.queue[booth.nextInLine];
+        //if there is no person in the postponed queue, call next person in the queue
+        if (processingUser[currentUser]) {
+            // if the next person is processing at other booth, put in the postponed queue
+            booth.postponed[booth.endPointPostponed] = currentUser;
+            emit Delayed(currentUser, boothId);
+            booth.currentProcessing = address(0);
+            booth.endPointPostponed += 1;
+            booth.nextInLine += 1;
+        } else {
+            // if the next person is not processing, call the person
+            processingUser[prevUser] = false;
+            processingUser[currentUser] = true;
+            booth.waiting[booth.queue[booth.nextInLine-1]] = 0;
+            delete booth.queue[booth.nextInLine-1];
+            booth.currentProcessing = currentUser;
+            emit NextInLine(boothId, currentUser);
+            booth.nextInLine += 1;
+        }
+    }
 }
