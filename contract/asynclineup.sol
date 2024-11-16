@@ -45,4 +45,10 @@ contract BoothQueue is ERC721, Ownable {
         booth.name = name;
         booth.baseURI = baseURI;        
     }
+
+     function getBoothWaiting(uint256 boothId) public view returns (uint256) {
+        Booth storage booth = booths[boothId];
+        return booth.waiting[msg.sender];
+        
+    }
 }
