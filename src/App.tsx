@@ -12,13 +12,13 @@ import { Outlet } from "react-router-dom";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { mainnet, filecoinCalibration, flowTestnet } from "wagmi/chains";
+import { mainnet, filecoinCalibration, flowTestnet,sepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const config = getDefaultConfig({
   appName: "ThanQ",
   projectId: "fc8b5ed20be8c39819928d4a45318f7e",
-  chains: [mainnet, filecoinCalibration, flowTestnet],
+  chains: [mainnet, filecoinCalibration, flowTestnet,sepolia],
   ssr: false, // If your dApp uses server side rendering (SSR)
 });
 

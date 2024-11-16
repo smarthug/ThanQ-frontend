@@ -4,16 +4,14 @@ import { styled } from '@mui/system';
 
 import { useRegisterBooth } from '../../hooks/useWriteThanQContract';
 
-import { create } from '@web3-storage/w3up-client'
+// import { create } from '@web3-storage/w3up-client'
 
-import * as Client from "@web3-storage/w3up-client";
+// import * as Client from "@web3-storage/w3up-client";
 // import { Signer } from "@web3-storage/w3up-client/principal/ed25519";
 // import * as Proof from "@web3-storage/w3up-client/proof";
 // import { StoreMemory } from "@web3-storage/w3up-client/stores/memory";
 
-const client = await create()
 
-console.log(client)
 
 
 const StyledContainer = styled(Container)({
@@ -74,9 +72,9 @@ const CreateQueue = () => {
     try {
       const yourEmail = "kirklayer@gmail.com"
       // authorize your local agent to act on your behalf
-      const client = await Client.create()
-      const myAccount = await client.login(yourEmail)
-      console.log(myAccount)
+      // const client = await Client.create()
+      // const myAccount = await client.login(yourEmail)
+      // console.log(myAccount)
 
       // lets go!
       // const files = await filesFromPaths(pathToAdd)
