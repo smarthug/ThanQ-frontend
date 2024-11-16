@@ -12,13 +12,13 @@ import { Outlet } from "react-router-dom";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { mainnet, skaleNebulaTestnet, skaleNebula, filecoin, filecoinCalibration, filecoinHyperspace, flowTestnet } from "wagmi/chains";
+import { mainnet, filecoinCalibration, flowTestnet } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const config = getDefaultConfig({
   appName: "ThanQ",
   projectId: "fc8b5ed20be8c39819928d4a45318f7e",
-  chains: [mainnet,   filecoinCalibration, flowTestnet],
+  chains: [mainnet, filecoinCalibration, flowTestnet],
   ssr: false, // If your dApp uses server side rendering (SSR)
 });
 
@@ -35,7 +35,7 @@ const RootContainer = styled(Box)({
 });
 
 const ContentBox = styled(Box)({
-  maxWidth:"480px",
+  maxWidth: "480px",
   width: "100%",
   height: "100%",
   display: "flex",
@@ -51,7 +51,7 @@ const ContentBox = styled(Box)({
 const queryClient = new QueryClient();
 
 function App() {
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
