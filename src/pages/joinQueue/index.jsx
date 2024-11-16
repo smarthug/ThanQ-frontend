@@ -2,8 +2,11 @@ import { Button, Box, Typography, Avatar, CircularProgress, Card, CardContent, C
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { useJoinQueue } from "../../hooks/useWriteThanQContract";
+
 export default function JoinQueue() {
   const params = useParams();
+  const joinQueue = useJoinQueue(params.queueId);
   const [queueInfo, setQueueInfo] = useState(null);
 
   useEffect(() => {
@@ -17,7 +20,9 @@ export default function JoinQueue() {
   }, [params.queueId]);
 
   function onClick() {
-    console.log("clicked");
+    console.log("joined queue");
+
+    joinQueue();
   }
 
   if (!queueInfo) {
