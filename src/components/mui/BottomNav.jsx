@@ -58,6 +58,7 @@ export default function LabelBottomNavigation() {
         value={`${value}`}
         onChange={handleChange}
         sx={{
+          color: (theme) => theme.palette.text.primary,
           '& .Mui-selected': {
             // color:(theme) => theme.palette.gradient.main
             color:"#4caf50"
