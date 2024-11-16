@@ -11,9 +11,6 @@ import { createTheme } from "@mui/material";
 //     },
 // });
 
-
-
-
 // export const theme = createTheme({
 //     palette: {
 //         gradient: {
@@ -28,8 +25,6 @@ import { createTheme } from "@mui/material";
 //         }
 //     }
 // });
-
-
 
 // export const theme = createTheme({
 //     palette: {
@@ -47,16 +42,21 @@ import { createTheme } from "@mui/material";
 // });
 
 export const theme = createTheme({
-    palette: {
-        gradient: {
-            main: "linear-gradient(-39deg, #00FFB0 0%, #66FFD2 100%)", // 매우 밝고 생생한 메인 그라데이션
-            mainChannel: "0 255 176",
-            light: "linear-gradient(135deg, #A0FFE4 0%, #80FFD4 100%)", // 더 밝고 부드러운 그라데이션
-            lightChannel: "160 255 228",
-            dark: "linear-gradient(135deg, #00E3A0 0%, #00C78B 100%)", // 상대적으로 어두운 톤 추가
-            darkChannel: "0 227 160",
-            contrastText: "#000", // 대비 텍스트 색상 (밝은 배경에 어두운 텍스트)
-            contrastTextChannel: "0 0 0"
-        }
-    }
+  palette: {
+    gradient: {
+      main: "linear-gradient(39deg, #074a44 0%, #072F4A 100%)", // 매우 밝고 생생한 메인 그라데이션
+      mainChannel: "0 255 176",
+      cards: "linear-gradient(-39deg, #072F4A 0%, #047A5A 100%)", // 메인 그라데이션과 동일
+      cardsChannel: "0 255 176",
+      light: "linear-gradient(135deg, #A0FFE4 0%, #80FFD4 100%)", // 더 밝고 부드러운 그라데이션
+      lightChannel: "160 255 228",
+      dark: "linear-gradient(135deg, #00E3A0 0%, #00C78B 100%)", // 상대적으로 어두운 톤 추가
+      darkChannel: "0 227 160",
+      contrastText: "#000", // 대비 텍스트 색상 (밝은 배경에 어두운 텍스트)
+      contrastTextChannel: "0 0 0",
+    },
+    background: {
+      default: "#074a44",
+    },
+  },
 });
