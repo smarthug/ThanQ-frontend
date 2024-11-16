@@ -10,3 +10,6 @@ export default function MiniKitProvider({ children }: { children: ReactNode }) {
 
 	return <>{children}</>
 }
+
+
+// console.log(MiniKit.isInstalled())

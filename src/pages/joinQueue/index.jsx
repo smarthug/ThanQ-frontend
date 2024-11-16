@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import { useJoinQueue } from "../../hooks/useWriteThanQContract";
 
+import { MiniKit, VerificationLevel } from '@worldcoin/minikit-js'
+
 export default function JoinQueue() {
   const params = useParams();
   const joinQueue = useJoinQueue(params.queueId);
@@ -21,8 +23,60 @@ export default function JoinQueue() {
 
   function onClick() {
     console.log("joined queue");
+    const worldMode = false;
+    if (worldMode) {
 
-    joinQueue();
+      JoinQueueWorld();
+
+    } else {
+
+      joinQueue();
+    }
+
+    // if(MiniKit.isInstalled()){
+
+    //   const { finalPayload } = await MiniKit.commandsAsync.verify(verifyPayload);
+
+    // joinQueue();
+
+    // }else{
+
+    // }
+  }
+
+  async function JoinQueueWorld() {
+    const verifyPayload = {
+      action: 'joinqueue', // This is your action ID from the Developer Portal
+      // signal: '0x12312', // Optional additional data
+      verification_level: VerificationLevel.Device, // Orb | Device
+    }
+
+    const { finalPayload } = await MiniKit.commandsAsync.verify(verifyPayload);
+
+    if (finalPayload.status === 'error') {
+      return console.log('Error payload', finalPayload)
+    }
+
+
+    // Verify the proof in the backend
+    const verifyResponse = await fetch('/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        payload: finalPayload, // Parses only the fields we need to verify
+        action: 'joinqueue',
+        // signal: '0x12312', // Optional
+      }),
+    })
+
+    // TODO: Handle Success!
+    const verifyResponseJson = await verifyResponse.json()
+    if (verifyResponseJson.status === 200) {
+      console.log('Verification success!')
+      joinQueue();
+    }
   }
 
   if (!queueInfo) {
