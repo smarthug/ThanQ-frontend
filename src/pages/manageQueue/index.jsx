@@ -1,10 +1,28 @@
 import { Button, Box, Typography, Avatar, CircularProgress, Card, CardContent, CardMedia } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { createWalletClient, custom } from 'viem';
+import { getAccount } from '@wagmi/core'
+import { sepolia } from 'viem/chains';
+// import { ethers } from ethers;
+import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
+// import { NotificationItem } from @pushprotocol/uiweb;
+
+
 import { useCallNext } from "../../hooks/useWriteThanQContract";
+
+import { providers,ethers } from 'ethers'
+// import { useMemo } from 'react'
+// import type { Account, Chain, Client, Transport } from 'viem'
+// import { Config, useConnectorClient } from 'wagmi'
+
+
+const wallet = "0xfa6Cc5134a2e81a2F19113992Ef61F9BE81cafdE"
 export default function JoinQueue() {
   const params = useParams();
   const [queueInfo, setQueueInfo] = useState(null);
+  const callNext = useCallNext(params.queueId);
 
   useEffect(() => {
     // Assume that we fetch booth information via an API call here.
@@ -17,13 +35,66 @@ export default function JoinQueue() {
   }, [params.queueId]);
 
   function onClick() {
-    console.log("clicked");
-    useCallNext();
+    console.log("Call Next");
+    // callNext();
+    fetchNotification();
   }
 
   if (!queueInfo) {
     return <CircularProgress />;
   }
+
+
+  const fetchNotification = async () => {
+    // Demo only supports MetaMask (or other browser based wallets) and gets provider that injects as window.ethereum into each page
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // Switch to sepolia
+    await provider.send('wallet_switchEthereumChain', [
+      { chainId: '0xAA36A7' },
+    ]);
+
+    // Get provider
+    await provider.send('eth_requestAccounts', []);
+
+    // Grabbing signer from provider
+    const signer = provider.getSigner();
+
+    // 1. window.ethereum을 사용하여 WalletClient 생성
+    // const walletClient = createWalletClient({
+    //   chain: sepolia,
+    //   transport: custom(window.ethereum),
+    // });
+
+    // // 2. Sepolia 네트워크로 전환
+    // await walletClient.switchChain({id:sepolia.id});
+
+    // // 3. 계정 요청
+    // const accounts = await walletClient.request({ method: 'eth_requestAccounts' });
+    // const account = accounts[0];
+
+    // console.log(account);
+
+    // const signer = clientToSigner(walletClient);
+
+    // // 4. Signer 역할을 하는 Account 객체 생성
+    // // const signer = getAccount(account);
+    // // console.log(signer);
+
+    // Initialize user for push
+    const userAlice = await PushAPI.initialize(signer, {
+      env: CONSTANTS.ENV.STAGING,
+    });
+
+    // retrieve notifications for users
+    const inboxNotifications = await userAlice.notification.list('INBOX', {
+      account: `eip155:11155111:${wallet}`,
+      limit: 5,
+    });
+
+    // set notifItems state so that react can render
+    // setNotifItems(inboxNotifications);
+  };
 
   return (
     <Box sx={{ padding: 3, maxWidth: 600, margin: 'auto', backgroundColor: '#f9f9f9', borderRadius: 4, boxShadow: 3 }}>
@@ -88,3 +159,16 @@ const fakeApiFetchQueueInfo = async (queueId) => {
     }, 1000);
   });
 };
+
+
+export function clientToSigner(client) {
+  const { account, chain, transport } = client
+  const network = {
+    chainId: chain.id,
+    name: chain.name,
+    ensAddress: chain.contracts?.ensRegistry?.address,
+  }
+  const provider = new providers.Web3Provider(transport, network)
+  const signer = provider.getSigner(account.address)
+  return signer
+}
