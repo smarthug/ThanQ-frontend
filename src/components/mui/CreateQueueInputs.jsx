@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
-import { useRegisterBooth } from '../../hooks/useRegisterBooth';
+import { useRegisterBooth } from '../../hooks/useWriteThanQContract';
 
 
 const StyledContainer = styled(Container)({

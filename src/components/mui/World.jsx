@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 // import { useBoothCounter } from '../../hooks/useBoothCounter';
 import { useBooths } from "../../hooks/useBooths";
-import { useGetAllWaitingAmount } from "../../hooks/useGetAllWaitingAmount";
+import { useGetAllWaitingAmount } from "../../hooks/useReadThanQContract";
 
 // Custom styled card component
 const StyledCard = styled(Card)(({ theme }) => ({

@@ -25,3 +25,18 @@ export const useGetAllWaitingAmount = () => {
 
     return result.data
 };
+
+export const useGetUserQueuePositions = (user: string) => {
+    const { chain } = useAccount();
+    const result = useReadContract({
+        abi,
+        address: chain ? CONTRACT_ADDRESSES[chain.id] : undefined,
+        functionName: 'getUserQueuePositions',
+        args: [user],
+
+    })
+
+    console.log(result.data)
+
+    return result.data
+};

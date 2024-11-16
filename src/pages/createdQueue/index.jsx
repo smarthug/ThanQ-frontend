@@ -37,7 +37,7 @@ export default function CreatedQueue() {
 
       <Grid container spacing={4} sx={{ marginTop: 4 }}>
         {queues.map((queue) => (
-          <Grid item key={queue.id} xs={12} sm={6} md={4}>
+          <Grid item key={queue.id} xs={12} sm={12} md={12}>
             <Card component={Paper} elevation={3}>
               <CardContent>
                 <Typography variant="h5" component="div">

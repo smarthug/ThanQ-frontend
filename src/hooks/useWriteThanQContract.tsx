@@ -28,3 +28,39 @@ export const useRegisterBooth = (name: string, baseURI: string) => {
         })
     }
 };
+
+
+export const useJoinQueue = (boothId: number) => {
+    const { chain } = useAccount();
+    // console.log(chain.id)
+    const { writeContract } = useWriteContract()
+
+
+
+    return ()=>{
+        writeContract({
+            abi,
+            address: chain ? CONTRACT_ADDRESSES[chain.id] : undefined,
+            functionName: 'joinQueue',
+            args: [boothId],
+        })
+    }
+};
+
+
+export const useCallNext = (boothId: number) => {
+    const { chain } = useAccount();
+    // console.log(chain.id)
+    const { writeContract } = useWriteContract()
+
+
+
+    return ()=>{
+        writeContract({
+            abi,
+            address: chain ? CONTRACT_ADDRESSES[chain.id] : undefined,
+            functionName: 'callNext',
+            args: [boothId],
+        })
+    }
+};
